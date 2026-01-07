@@ -1,4 +1,4 @@
-const middlewares = require("./middlewares");
+
 const controllers = require("./controllers");
 
 const registerRoutes = (app) => {
