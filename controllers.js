@@ -8,7 +8,7 @@ const allPosts = async (req, res) => {
   ]);
   res.send(query);
 };
-
+//serch
 const searchPosts = async (req, res) => {
   const regex = new RegExp(req.params.q, "i");
 
