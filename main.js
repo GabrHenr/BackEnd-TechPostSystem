@@ -4,10 +4,11 @@ const { mongoConnect } = require("./database");
 const app = express();
 app.use(express.json())
 require('dotenv').config();
+const port = process.env.PORT||3000
 
 mongoConnect().then(console.log("Success")).catch((err) => console.log(err));
 
 routes.registerRoutes(app);
-app.listen(process.env.PORT, () => {
-  console.log(`Example app listening on port ${process.env.PORT}`);
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
 });
