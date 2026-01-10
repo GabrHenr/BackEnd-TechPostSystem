@@ -12,4 +12,14 @@ const Post = mongoose.model(
     post_video_url: { type: "String" },
   })
 );
-module.exports = {Post}
+
+const User = mongoose.model(
+  "User",
+  new mongoose.Schema({
+    user_name: { type: "String" },
+    user_email: { type: "String" },
+    user_pass: { type: "String" },
+    role: { type: "String" },
+  })
+);
+module.exports = { Post, User };

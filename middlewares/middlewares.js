@@ -1,3 +1,6 @@
+const { User } = require("../models/model");
+const bcrypt = require("bcrypt");
+
 const authToken = (req, res, next) => {
   const token = req.headers["authorization"];
 
@@ -13,4 +16,6 @@ const authToken = (req, res, next) => {
     return res.status(403).send("A token is required for authentication");
   }
 };
-module.exports = {authToken};
+
+
+module.exports = { authToken };
