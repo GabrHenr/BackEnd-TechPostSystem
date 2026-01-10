@@ -1,0 +1,41 @@
+#####
+GET http://127.0.0.1:3000/posts
+Content-Type: application/json
+Authorization: token
+
+
+#####
+GET  http://127.0.0.1:3000/posts/search?q=controllers
+Content-Type: application/json
+Authorization: token
+
+#####
+GET  http://127.0.0.1:3000/posts/6960cf1153b311993ca3c7b3
+Content-Type: application/json
+Authorization: token
+
+#####
+POST http://127.0.0.1:3000/posts
+Content-Type: application/json
+Authorization: token
+
+{
+    "teacher_name": "Jonnas",
+    "post_title": "Implementando arquivo de requisições http",
+    "post_description": "Esse post é um teste para implementação de requisições http, isso deixa os testes mais rápidos e não necessita do POSTMAN",
+    "post_videp_url": "https://aikdjkladjkjaksdj.com.br"
+}
+
+###
+PUT http://127.0.0.1:3000/posts/6960cf1153b311993ca3c7b3
+Content-Type: application/json
+Authorization: token
+
+{
+    "teacher_name": "Kale"
+}
+
+###
+DELETE http://127.0.0.1:3000/posts/6962412ce7352cd18a7b4371
+Content-Type: application/json
+Authorization: token

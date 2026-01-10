@@ -19,9 +19,12 @@ const searchPosts = async (req, res) => {
   try {
     const regex = new RegExp(req.query.q, "i");
 
-    const searchRegexQuery = await Post.find({
-      $or: [{ post_title: regex }, { post_description: regex }],
-    });
+    const searchRegexQuery = await Post.find(
+      {
+        $or: [{ post_title: regex }, { post_description: regex }],
+      },
+      ["post_title", "teacher_name", "post_creation_date"]
+    );
     if (searchRegexQuery.length === 0) {
       return res.status(404).json({ success: "No post found" });
     }
