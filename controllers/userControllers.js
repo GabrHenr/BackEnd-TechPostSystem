@@ -23,7 +23,7 @@ const loginUserHandler = async (req, res) => {
           username: userOnDB.user_email,
         },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: "20m" }
+        { expiresIn: "15m" }
       );
       const refreshToken = jwt.sign(
         {
@@ -36,15 +36,18 @@ const loginUserHandler = async (req, res) => {
         await User.findByIdAndUpdate(userOnDB._id, {
           user_token: refreshToken,
         });
-        res.cookie("jwt", refreshToken, {
-          htttpOnly: true,
+        res.cookie("refreshToken", refreshToken, {
+          httpOnly: true,
           maxAge: 24 * 60 * 60 * 1000,
+        });
+        res.cookie("accessToken", accessToken, {
+          httpOnly: true,
+          maxAge: 15 * 60 * 1000,
         });
         return res.json({
           user_name: userOnDB.user_name,
           user_email: userOnDB.user_email,
           user_id: userOnDB._id,
-          user_Token: accessToken,
         });
       } catch {
         return res
@@ -123,7 +126,8 @@ const logoutUserHandler = async (req, res) => {
     user_token: refreshToken,
   });
   if (userWithRefreshTokenInDB == null) {
-    res.clearCookie("jwt", { htttpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
+    res.clearCookie("accessToken");
+    res.clearCookie("refreshToken");
     return res.sendStatus(204);
   }
   //delete the refresh token in db
@@ -131,7 +135,8 @@ const logoutUserHandler = async (req, res) => {
     await User.findByIdAndUpdate(userWithRefreshTokenInDB._id, {
       user_token: "",
     });
-    res.clearCookie("jwt", { htttpOnly: true, maxAge: 24 * 60 * 60 * 1000 }); //secure: true
+    res.clearCookie("accessToken");
+    res.clearCookie("refreshToken"); //secure: true
     return res.sendStatus(204);
   } catch {
     return res.sendStatus(500);

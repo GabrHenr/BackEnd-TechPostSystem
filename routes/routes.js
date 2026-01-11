@@ -11,7 +11,7 @@ const registerRoutes = (app) => {
   //Below here only when token veryfied
   app.get("/posts", postControllers.allPosts);
   app.get("/posts/search", postControllers.searchPosts);
-  app.post("/posts", postControllers.createPosts);
+  app.post("/posts", middlewares.authTeacher,postControllers.createPosts);
   app.get("/posts/:id", postControllers.readPost);
   app.put("/posts/:id", postControllers.editPost);
   app.delete("/posts/:id", postControllers.deletePost);
