@@ -3,6 +3,8 @@ const { User } = require("../models/model");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
+const jwt = require("jsonwebtoken");
+
 const loginUserHandler = async (req, res) => {
   try {
     const userLoggingEmail = req.body.user_email;
@@ -15,11 +17,40 @@ const loginUserHandler = async (req, res) => {
 
     const isPassRight = bcrypt.compareSync(userLoggingPass, userOnDB.user_pass);
     if (isPassRight) {
-      return res.status(201).json({
-        user_name: userOnDB.user_name,
-        user_email: userOnDB.user_email,
-        user_id: userOnDB._id,
-      });
+      //create JWT
+      const accessToken = jwt.sign(
+        {
+          username: userOnDB.user_email,
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        { expiresIn: "20m" }
+      );
+      const refreshToken = jwt.sign(
+        {
+          username: userOnDB.user_email,
+        },
+        process.env.REFRESH_TOKEN_SECRET,
+        { expiresIn: "1d" }
+      );
+      try {
+        await User.findByIdAndUpdate(userOnDB._id, {
+          user_token: refreshToken,
+        });
+        res.cookie("jwt", refreshToken, {
+          htttpOnly: true,
+          maxAge: 24 * 60 * 60 * 1000,
+        });
+        return res.json({
+          user_name: userOnDB.user_name,
+          user_email: userOnDB.user_email,
+          user_id: userOnDB._id,
+          user_Token: accessToken,
+        });
+      } catch {
+        return res
+          .status(500)
+          .json({ error: "Could not delete due to server error" });
+      }
     }
     return res.status(401).json({ erro: "Error invalid password" });
   } catch (error) {
@@ -82,4 +113,28 @@ const registerUserHandler = async (req, res) => {
     res.status(500).json({ message: "error" });
   }
 };
-module.exports = { loginUserHandler, registerUserHandler };
+
+const logoutUserHandler = async (req, res) => {
+  //also delete on the front
+  const cookies = req.cookies;
+  if (!cookies?.jwt) return res.sendStatus(204);
+  const refreshToken = cookies.jwt;
+  const userWithRefreshTokenInDB = await User.findOne({
+    user_token: refreshToken,
+  });
+  if (userWithRefreshTokenInDB == null) {
+    res.clearCookie("jwt", { htttpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
+    return res.sendStatus(204);
+  }
+  //delete the refresh token in db
+  try {
+    await User.findByIdAndUpdate(userWithRefreshTokenInDB._id, {
+      user_token: "",
+    });
+    res.clearCookie("jwt", { htttpOnly: true, maxAge: 24 * 60 * 60 * 1000 }); //secure: true
+    return res.sendStatus(204);
+  } catch {
+    return res.sendStatus(500);
+  }
+};
+module.exports = { loginUserHandler, registerUserHandler, logoutUserHandler };

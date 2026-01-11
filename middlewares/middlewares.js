@@ -1,21 +1,21 @@
 const { User } = require("../models/model");
-const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const authToken = (req, res, next) => {
-  const token = req.headers["authorization"];
+  const authHeader = req.headers["authorization"];
 
-  if (!token) {
+  if (!authHeader)
     return res.status(403).send("A token is required for authentication");
-  }
-  try {
-    if (token !== "token") {
-      throw new Error("invalid token");
+
+  const authHeaderToken = authHeader.split(" ")[1];
+  jwt.verify(
+    authHeaderToken,
+    process.env.ACCESS_TOKEN_SECRET,
+    (err, decodedToken) => {
+      if (err) return res.status(403).json({ erro: "Invalid Token" });
+      next();
     }
-    next();
-  } catch (err) {
-    return res.status(403).send("A token is required for authentication");
-  }
+  );
 };
-
 
 module.exports = { authToken };

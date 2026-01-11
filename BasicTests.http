@@ -1,17 +1,19 @@
-#####
-GET http://127.0.0.1:3000/users
-Content-Type: application/json
-Authorization: token
+
 
 ###
 GET http://127.0.0.1:3000/users/login
 Content-Type: application/json
-Authorization: token
 
 {
-    "user_email": "userCreatorAdministrator@email.com",
+    "user_email": "userTeacher@gmail.com",
     "user_pass": "12345678"
 }
+
+#####
+GET http://127.0.0.1:3000/users/refresh
+Content-Type: application/json
+Authorization: token
+
 
 ###
 POST http://127.0.0.1:3000/users/register
@@ -27,27 +29,29 @@ Authorization: token
     "user_adm_pass": "12345678"
 }
 
-
+###
+GET http://127.0.0.1:3000/users/logout
+Content-Type: application/json
 #####
 GET http://127.0.0.1:3000/posts
 Content-Type: application/json
-Authorization: token
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJUZWFjaGVyQGdtYWlsLmNvbSIsImlhdCI6MTc2ODA5NjMxNywiZXhwIjoxNzY4MDk3NTE3fQ.XOKOyHWK2qp0Q2Tf1UARBIYgeku1sXKUYjLe1EBroQw
 
 
 #####
 GET  http://127.0.0.1:3000/posts/search?q=controllers
 Content-Type: application/json
-Authorization: token
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJUZWFjaGVyQGdtYWlsLmNvbSIsImlhdCI6MTc2ODA5MjU1NSwiZXhwIjoxNzY4MDkzNzU1fQ.kCRJaARC3kVJOpxrTv6sXDTjPW-IJVGe4vFlf9bPQXc
 
 #####
 GET  http://127.0.0.1:3000/posts/6960cf1153b311993ca3c7b3
 Content-Type: application/json
-Authorization: token
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJUZWFjaGVyQGdtYWlsLmNvbSIsImlhdCI6MTc2ODA5MjU1NSwiZXhwIjoxNzY4MDkzNzU1fQ.kCRJaARC3kVJOpxrTv6sXDTjPW-IJVGe4vFlf9bPQXc
 
 #####
 POST http://127.0.0.1:3000/posts
 Content-Type: application/json
-Authorization: token
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJUZWFjaGVyQGdtYWlsLmNvbSIsImlhdCI6MTc2ODA5MjU1NSwiZXhwIjoxNzY4MDkzNzU1fQ.kCRJaARC3kVJOpxrTv6sXDTjPW-IJVGe4vFlf9bPQXc
 
 {
     "teacher_name": "Jonnas",
@@ -59,13 +63,13 @@ Authorization: token
 ###
 PUT http://127.0.0.1:3000/posts/6960cf1153b311993ca3c7b3
 Content-Type: application/json
-Authorization: token
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJUZWFjaGVyQGdtYWlsLmNvbSIsImlhdCI6MTc2ODA5MjU1NSwiZXhwIjoxNzY4MDkzNzU1fQ.kCRJaARC3kVJOpxrTv6sXDTjPW-IJVGe4vFlf9bPQXc
 
 {
-    "teacher_name": "Kale"
+    "teacher_name": "Dino"
 }
 
 ###
 DELETE http://127.0.0.1:3000/posts/6962412ce7352cd18a7b4371
 Content-Type: application/json
-Authorization: token
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJUZWFjaGVyQGdtYWlsLmNvbSIsImlhdCI6MTc2ODA5MjU1NSwiZXhwIjoxNzY4MDkzNzU1fQ.kCRJaARC3kVJOpxrTv6sXDTjPW-IJVGe4vFlf9bPQXc

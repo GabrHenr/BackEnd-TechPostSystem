@@ -20,6 +20,7 @@ const User = mongoose.model(
     user_email: { type: "String" },
     user_pass: { type: "String" },
     role: { type: "String" },
+    user_token: { type: "String" },
   })
 );
 module.exports = { Post, User };

@@ -1,23 +1,20 @@
-
-const controllers = require("../controllers/postcontrollers");
-const userControllers = require("../controllers/userontroller")
-const middlewares = require("../middlewares/middlewares")
+const postControllers = require("../controllers/postControllers");
+const userControllers = require("../controllers/userControllers");
+const tokenControllers = require("../controllers/tokenControllers");
+const middlewares = require("../middlewares/middlewares");
 const registerRoutes = (app) => {
   app.get("/users/login", userControllers.loginUserHandler);
-
+  app.get("/users/refresh", tokenControllers.refreshTokenHandler);
   app.post("/users/register", userControllers.registerUserHandler);
-
-  app.get("/posts", controllers.allPosts);
-
-  app.get("/posts/search", controllers.searchPosts);
-
-  app.post("/posts", controllers.createPosts);
-
-  app.get("/posts/:id", controllers.readPost);
-
-  app.put("/posts/:id", controllers.editPost);
-
-  app.delete("/posts/:id", controllers.deletePost);
+  app.get("/users/logout", userControllers.logoutUserHandler);
+  app.use(middlewares.authToken);
+  //Below here only when token veryfied
+  app.get("/posts", postControllers.allPosts);
+  app.get("/posts/search", postControllers.searchPosts);
+  app.post("/posts", postControllers.createPosts);
+  app.get("/posts/:id", postControllers.readPost);
+  app.put("/posts/:id", postControllers.editPost);
+  app.delete("/posts/:id", postControllers.deletePost);
 };
 
 module.exports = { registerRoutes };
