@@ -24,7 +24,7 @@ jobs:
       #   run: npm test
 
       - name: construir imagem docker
-        run: docker build -t PostApiSystem
+        run: docker build -t "PostApiSystem"
 
 
 
