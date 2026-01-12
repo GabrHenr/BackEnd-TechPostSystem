@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const Post = mongoose.model(
   "Post",
   new mongoose.Schema({
-    teacher_name: { type: "String" },
-    teacher_id: { type: "UUID" },
+    user_name: { type: "String" },
+    user_id: { type: "String" },
     post_title: { type: "String" },
     post_description: { type: "String" },
     post_creation_date: { type: "Date" },

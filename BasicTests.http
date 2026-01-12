@@ -1,11 +1,20 @@
 
 
 ###
-GET http://127.0.0.1:3000/users/login
+POST http://127.0.0.1:3000/users/login
 Content-Type: application/json
 
 {
     "user_email": "userTeacher@gmail.com",
+    "user_pass": "12345678"
+}
+
+###
+POST http://127.0.0.1:3000/users/login
+Content-Type: application/json
+
+{
+    "user_email": "userStudentr@gmail.com",
     "user_pass": "12345678"
 }
 
@@ -21,8 +30,8 @@ Content-Type: application/json
 Authorization: token
 
 {
-    "user_name": "thisUserStudent",
-    "user_email": "userStudentr@gmail.com",
+    "user_name": "thisUserStudent2",
+    "user_email": "Teststudent2@gmail.com",
     "user_pass": "12345678",
     "role": "read",
     "user_adm_email": "userCreatorAdministrator@email.com",
@@ -35,41 +44,39 @@ Content-Type: application/json
 #####
 GET http://127.0.0.1:3000/posts
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJUZWFjaGVyQGdtYWlsLmNvbSIsImlhdCI6MTc2ODA5NjMxNywiZXhwIjoxNzY4MDk3NTE3fQ.XOKOyHWK2qp0Q2Tf1UARBIYgeku1sXKUYjLe1EBroQw
 
 
 #####
 GET  http://127.0.0.1:3000/posts/search?q=controllers
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJUZWFjaGVyQGdtYWlsLmNvbSIsImlhdCI6MTc2ODA5MjU1NSwiZXhwIjoxNzY4MDkzNzU1fQ.kCRJaARC3kVJOpxrTv6sXDTjPW-IJVGe4vFlf9bPQXc
+
 
 #####
 GET  http://127.0.0.1:3000/posts/6960cf1153b311993ca3c7b3
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJUZWFjaGVyQGdtYWlsLmNvbSIsImlhdCI6MTc2ODA5MjU1NSwiZXhwIjoxNzY4MDkzNzU1fQ.kCRJaARC3kVJOpxrTv6sXDTjPW-IJVGe4vFlf9bPQXc
+
 
 #####
 POST http://127.0.0.1:3000/posts
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJUZWFjaGVyQGdtYWlsLmNvbSIsImlhdCI6MTc2ODA5MjU1NSwiZXhwIjoxNzY4MDkzNzU1fQ.kCRJaARC3kVJOpxrTv6sXDTjPW-IJVGe4vFlf9bPQXc
+
 
 {
-    "teacher_name": "Jonnas",
+    "user_name": "thisUserTeacher",
     "post_title": "Implementando arquivo de requisições http",
     "post_description": "Esse post é um teste para implementação de requisições http, isso deixa os testes mais rápidos e não necessita do POSTMAN",
-    "post_videp_url": "https://aikdjkladjkjaksdj.com.br"
+    "post_videp_url": "https://aikdjkladjkjaksdj.com.br",
+    "user_id":"6962de1fcbdaef1d86392f9a"
 }
 
 ###
-PUT http://127.0.0.1:3000/posts/6960cf1153b311993ca3c7b3
+PUT http://127.0.0.1:3000/posts/69645595f2493e8b0f11d231
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJUZWFjaGVyQGdtYWlsLmNvbSIsImlhdCI6MTc2ODA5MjU1NSwiZXhwIjoxNzY4MDkzNzU1fQ.kCRJaARC3kVJOpxrTv6sXDTjPW-IJVGe4vFlf9bPQXc
 
 {
-    "teacher_name": "Dino"
+    "user_name": "MInecraft"
 }
 
 ###
-DELETE http://127.0.0.1:3000/posts/6962412ce7352cd18a7b4371
+DELETE http://127.0.0.1:3000/posts/6964409b6b98a3709eda9728
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJUZWFjaGVyQGdtYWlsLmNvbSIsImlhdCI6MTc2ODA5MjU1NSwiZXhwIjoxNzY4MDkzNzU1fQ.kCRJaARC3kVJOpxrTv6sXDTjPW-IJVGe4vFlf9bPQXc
