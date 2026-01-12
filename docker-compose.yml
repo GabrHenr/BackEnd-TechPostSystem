@@ -22,9 +22,12 @@ services:
       - "3000:3000"
     depends_on:
       - mongodb
+    env_file:
+      - .env
     environment:
       PORT: 3000
       MONGO_URI: mongodb://mongodb:27017/postsDB
+
 
     volumes: 
         - .:/usr/src/postApp

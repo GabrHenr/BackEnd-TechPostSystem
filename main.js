@@ -1,16 +1,13 @@
-const express = require("express");
-const routes = require("./routes");
 const { mongoConnect } = require("./database");
-const {authToken} = require("./middlewares");
-const app = express();
-app.use(express.json())
-require('dotenv').config();
-const port = process.env.PORT||3000
 
-mongoConnect().then(console.log("Success")).catch((err) => console.log(err));
+const app = require("./src/app");
+require("dotenv").config();
 
-app.use(authToken)
-routes.registerRoutes(app);
+const port = process.env.PORT || 3000;
+
+mongoConnect()
+  .then(() => console.log("MongoDB conectado"))
+  .catch((err) => console.error(err));
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

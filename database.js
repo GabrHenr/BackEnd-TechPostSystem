@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
+const { User } = require("./models/model");
+const bcrypt = require("bcrypt");
+require("dotenv").config();
 
-async function mongoConnect(params) {
+async function mongoConnect() {
   await mongoose.connect(process.env.MONGO_URI);
 }
 

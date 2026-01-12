@@ -1,0 +1,30 @@
+name: build docker image
+
+on:
+  push:
+    pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Node.js Config
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Dependencias npm
+        run: npm install
+
+      # - name: Testes de integridade
+      #   run: npm test
+
+      - name: construir imagem docker
+        run: docker build -t postapisystem .
+
+
+
