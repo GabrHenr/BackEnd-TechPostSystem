@@ -7,11 +7,14 @@
 * [Descrição do Projeto](#descrição-do-projeto)
 * [Arquitetura](#arquitetura)
 * [Status do Projeto](#status_do_projeto)
+* [Pré-requisitos](#pré-requisitos-para-executar-o-projeto)
+* [Definir Env](#definir-env)
+** [Subir a Aplicação](#subir-a-aplicação)
 * [Funcionalidades](#funcionalidades)
-* [Tecnologias utilizadas](#tecnologias-utilizadas)
-* [Pessoas Contribuidoras](#pessoas-contribuidoras)
-* [Pessoas Desenvolvedoras do Projeto](#pessoas-desenvolvedoras)
-* [Conclusão](#conclusão)
+** [Gerenciamento Básico de Usuários](#gerenciamento-básico-de-usuários)
+** [Gerenciamento de Posts](#gerenciamento-de-posts)
+* [Desafios](#desafios)
+* [Considerações Finais](#considerações-finais)
 
 # Descrição do projeto
 
