@@ -1,26 +1,39 @@
 const { Post, User } = require("../models/model");
 
 const allPosts = async (req, res) => {
-  const { page, amountOfPosts } = req.query;
+  const page = parseInt(req.query.page) || 1;
+  const amountOfPosts = parseInt(req.query.amountOfPosts) || 5;
   try {
-    p;
     const posts = await Post.aggregate([
       {
         $facet: {
-          metadata: [{ $count: "totalcount" }],
-          data: [{ $skip: (page - 1) * pagesize }, { $limit: pageSize }],
+          metadata: [{ $count: "totalCount" }],
+          data: [
+            {
+              $skip: (page - 1) * amountOfPosts,
+            },
+            { $limit: amountOfPosts },
+            {
+              $project: {
+                post_title: 1,
+                user_name: 1,
+                post_creation_date: 1,
+              },
+            },
+          ],
         },
       },
-    ]).select("post_title user_name post_creation_date");
+    ]);
+    const totalCount = posts[0]?.metadata[0]?.totalCount || 0;
 
     return res.status(200).json({
       posts: {
         metadata: {
-          totalCount: posts[0].metadata[0].totalCount,
+          totalCount,
           page,
-          pageSize,
+          amountOfPosts,
         },
-        data: posts[0].data,
+        data: posts[0].data || [],
       },
     });
   } catch (err) {
