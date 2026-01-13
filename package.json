@@ -4,7 +4,9 @@
   "description": "BackEnd Tech Challenge 2",
   "main": "main.js",
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "swagger": "node swagger.js",
+    "start": "npm run swagger && node main.js"
   },
   "author": "",
   "license": "ISC",
@@ -22,8 +24,9 @@
     "supertest": "^7.2.2"
   },
   "jest": {
-  "testEnvironment": "node",
-  "setupFilesAfterEnv": ["./jestTests/setup.js"]
-}
-
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "./jestTests/setup.js"
+    ]
+  }
 }

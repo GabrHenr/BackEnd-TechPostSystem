@@ -14,7 +14,7 @@ POST http://127.0.0.1:3000/users/login
 Content-Type: application/json
 
 {
-    "user_email": "userStudentr@gmail.com",
+    "user_email": "Teststudent2@gmail.com",
     "user_pass": "12345678"
 }
 
@@ -33,7 +33,7 @@ Authorization: token
     "user_name": "thisUserStudent2",
     "user_email": "Teststudent2@gmail.com",
     "user_pass": "12345678",
-    "role": "read",
+    "role": "readWrite",
     "user_adm_email": "userCreatorAdministrator@email.com",
     "user_adm_pass": "12345678"
 }
@@ -47,12 +47,12 @@ Content-Type: application/json
 
 
 #####
-GET  http://127.0.0.1:3000/posts/search?q=controllers
+GET  http://127.0.0.1:3000/posts/search?q=requis
 Content-Type: application/json
 
 
 #####
-GET  http://127.0.0.1:3000/posts/6960cf1153b311993ca3c7b3
+GET  http://127.0.0.1:3000/posts/696584d4094eb77398ccbd12
 Content-Type: application/json
 
 
@@ -65,12 +65,11 @@ Content-Type: application/json
     "user_name": "thisUserTeacher",
     "post_title": "Implementando arquivo de requisições http",
     "post_description": "Esse post é um teste para implementação de requisições http, isso deixa os testes mais rápidos e não necessita do POSTMAN",
-    "post_videp_url": "https://aikdjkladjkjaksdj.com.br",
-    "user_id":"6962de1fcbdaef1d86392f9a"
+    "post_videp_url": "https://aikdjkladjkjaksdj.com.br"
 }
 
 ###
-PUT http://127.0.0.1:3000/posts/69645595f2493e8b0f11d231
+PUT http://127.0.0.1:3000/posts/696584d4094eb77398ccbd12
 Content-Type: application/json
 
 {
@@ -78,5 +77,5 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://127.0.0.1:3000/posts/6964409b6b98a3709eda9728
+DELETE http://127.0.0.1:3000/posts/696584d4094eb77398ccbd12
 Content-Type: application/json
