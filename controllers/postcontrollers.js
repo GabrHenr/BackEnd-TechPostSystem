@@ -1,14 +1,29 @@
 const { Post, User } = require("../models/model");
 
 const allPosts = async (req, res) => {
+  const { page, amountOfPosts } = req.query;
   try {
-    const posts = await Post.find({}).select(
-      "post_title user_name post_creation_date"
-    );
+    p;
+    const posts = await Post.aggregate([
+      {
+        $facet: {
+          metadata: [{ $count: "totalcount" }],
+          data: [{ $skip: (page - 1) * pagesize }, { $limit: pageSize }],
+        },
+      },
+    ]).select("post_title user_name post_creation_date");
 
-    return res.status(200).json(posts);
+    return res.status(200).json({
+      posts: {
+        metadata: {
+          totalCount: posts[0].metadata[0].totalCount,
+          page,
+          pageSize,
+        },
+        data: posts[0].data,
+      },
+    });
   } catch (err) {
-    console.error("Error fetching posts:", err);
     return res.status(500).json({
       error: "Error retrieving posts from server",
     });

@@ -55,6 +55,8 @@ REFRESH_TOKEN_SECRET=...
 ```
 docker-compose up --build
 ```
+![Docker Desktop](./readmeImages/docker_up.png)
+
 
 # Funcionalidades
 

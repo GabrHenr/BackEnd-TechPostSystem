@@ -79,12 +79,17 @@ const registerUserHandler = async (req, res) => {
       user_pass: hashedPassword,
       role: user_role,
     });
-
-    await user.save();
-
-    return res.status(201).json({
-      message: "User created successfully",
-    });
+    try {
+      await user.save();
+      return res.status(201).json({
+        message: "User created successfully",
+      });
+    } catch {
+      console.error("User register error:", err);
+      return res.status(500).json({
+        error: "Internal server error",
+      });
+    }
   } catch (err) {
     console.error("User register error:", err);
     return res.status(500).json({
