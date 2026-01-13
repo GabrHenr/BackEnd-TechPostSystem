@@ -5,7 +5,8 @@
 
 # Índice 
 * [Descrição do Projeto](#descrição-do-projeto)
-* [Status do Projeto](#status-do-projeto)
+* [Arquitetura](#arquitetura)
+* [Status do Projeto](#status_do_projeto)
 * [Funcionalidades](#funcionalidades)
 * [Tecnologias utilizadas](#tecnologias-utilizadas)
 * [Pessoas Contribuidoras](#pessoas-contribuidoras)
@@ -18,17 +19,22 @@ Este é um Back end completo para um sistema de gerenciamento de posts proposto 
 esse back-end será usado para dar  vida a versão escalável do sistema feito no Tech Challenge 1 onde foi usado o OutSystems
 para fazer o sistema original. Este projeto possui os arquivos necessários para subir uma API e um banco de dados.
 
-# Status do Projeto
+## Arquitetura
+
+A API do projeto foi programada usando Node.js e o Express para roteamento, para banco foi utilizado o mongoDB devido a facilidade de adaptações do banco de dados, o projeto possui um sistema de autenticação simples, testes foram realizados utilizando o Jest.
+
+
+## Status do Projeto
 
 Este projeto já cumpre com os requisitos proposto pelo Tech Challenge tornando-o assim completo para a entrega
 
-# Pré-requisitos
+## Pré-requisitos para executar o projeto
 
 * Node.js(V22)
 * Docker desktop
 * Docker Compose
 
-## Definir env
+### Definir env
 
 * Primeiro passo é definir a porta onde a API irrá escutar as requisições
 ```
@@ -46,7 +52,7 @@ ACCESS_TOKEN_SECRET=...
 REFRESH_TOKEN_SECRET=...
 ```
 
-## Subir a aplicação
+### Subir a aplicação
 
 * Para subir a aplicação será necesspario ter o docker na sua máquina
 * Após a instalação do docker e iniciar os processos do mesmo digite o comando abaixo no mesmo local do projeto
@@ -57,9 +63,9 @@ docker-compose up --build
 ![Docker Desktop](./readmeImages/docker_up.png)
 
 
-# Funcionalidades
+## Funcionalidades
 
-## Gerenciamento básico de usuários
+### Gerenciamento básico de usuários
 
 Para deixar os testes da aplicação mais simples e avaliação foi criado rotas de gerenciamento básicos de usuários
 sendo eles o registro de usuários, login e autenticação de usuários e o logout de usuários.
@@ -109,7 +115,7 @@ flowchart TD
     B --> C[Fim]
 ```
 
-## Gerenciamento de Posts
+### Gerenciamento de Posts
 
 Esse é o ponto principal da aplicação, a aplicação possui controles para criar, visualizar um ou mais posts, procurar por posts que possuem certas palavras, editar posts e deletar posts.
 As rotas de criação, edição e exclusão de posts são protegidas por autenticação onde apenas usuários logados com permissão readWrite podem fazer criar, excluir e a rota de editar, que também é protegida
@@ -235,7 +241,7 @@ flowchart TD
 ```
 
 
-# Desafios
+## Desafios
 
 A maior dificuldade durante a criação do app foi a montagem dos controles da API, não foi uma dificuldade impeditiva, porém foi necessário muitas horas gastas em leitura de documentação, debug, e aulas complementares para entender a estruturação, melhores práticas de código e encriptamento de dados. Um ponto de falha como programador foi que durante todo o tempo de pesquisa e implementação houve vezes em que foi perdido o objetivo do programa ou variáveis eram passadas de forma errada por não ter separado um desenho das variáveis dentro banco de dados.
 
@@ -245,7 +251,10 @@ Outro problema foram os testes, como eu tenho pouco tempo para realizar as aulas
 
 Dificuldade *pessoal* de interpretação, como eu venho de outra área onde tudo deve ser detalhado nos mínimos detalhes, ter a falta de instruções muito específicas deixaram-me confuso, isto aconteceu nas rotas GET /posts onde a rota é citada duas vezes durante o TechChalenge. Assim não sei se o endpoint possui duas funções ou uma, visto que para o sistema desenvolvido todo post criado é um post publicado já que não foi reqwuisitado que deveriam ter posts que não seriam publicados mas que seriam criados.
 
-Autor do projeto
-![GitHub contributors](https://img.shields.io/github/contributors-anon/GabrHenr/TechChallenge2)
+## Considerações finais
+
+Uma dificuldade que se tornou uma conquista foi fazer tudo isso sozinho e viajando por pelo menos 2 semanas por mês a trabalho durante mais da metade da etapa do curso, durante as viagens devido ao ambiente de trabalho ser muito desgastante mentalmente não conseguia programar. Houve momentos que eu me perguntei se realmente iria conseguir, se isso não era uma perca de tempo e dinheiro, que se não seria mais fácil fazer isso tudo com a ajuda de IA e estudar depois. Porém eu sei que não vou estudar depois e se eu fizesse tudo com IA e não iria aprender nada, então comecei a fazer sacrifícios, acordava 4 horas da manhã todo dia para ver as video aulas do curso e saia para trabalhar as 7 horas chegando muitas vezes em casa as 18 horas, programava este projeto enquanto via as aulas, gastava meus sabados e domingos para maratonar o curso, dormia tarde no sabado e acordava cedo nos domingos, sacrifiquei até meu natal e ano novo kkkkkkk. Infelizmente não consegui ver todas as video aulas, devido as circunstancias assim tive que limitar a escolha do banco de dados e acabei optando pelo mongo pela facilidade adaptação do banco durante o decorrer do projeto, assim sacrifiquei as aulas do PostgreSQL e algumas outras para fazer aquelas que estavam diretamente ligadas a arquitetura escolhida, aprendi muitas coisas com isso, e completar este projeto fazendo pesquisas em documentação, pouca intervenção de IA(sendo usada para quando não achava a resolução online de problemas) me deu mais forças para continuar e não desitir da pós-graduação.
+
+# Autor do projeto - Gabriel Henrique Gonçalves - 2026
 
 
