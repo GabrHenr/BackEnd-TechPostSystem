@@ -20,9 +20,6 @@ jobs:
       - name: Dependencias npm
         run: npm install
 
-      # - name: Testes de integridade
-      #   run: npm test
-
       - name: construir imagem docker
         run: docker build -t postapisystem .
 

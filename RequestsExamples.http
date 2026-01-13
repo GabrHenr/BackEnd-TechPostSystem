@@ -1,0 +1,89 @@
+
+
+### Teacher
+POST http://127.0.0.1:3000/users/login
+Content-Type: application/json
+
+{
+    "user_email": "thisUserIsTeacher@gmail.com",
+    "user_pass": "12345678"
+}
+
+### Student
+POST http://127.0.0.1:3000/users/login
+Content-Type: application/json
+
+{
+    "user_email": "thisUserIsStudent@gmail.com",
+    "user_pass": "12345678"
+}
+
+
+
+
+### Student create
+POST http://127.0.0.1:3000/users/register
+Content-Type: application/json
+
+{
+    "user_name": "thisUserIsStudent",
+    "user_email": "thisUserIsStudent@gmail.com",
+    "user_pass": "12345678",
+    "role": "read"
+}
+
+### Teacher create
+POST http://127.0.0.1:3000/users/register
+Content-Type: application/json
+
+{
+    "user_name": "thisUserIsTeacher",
+    "user_email": "thisUserIsTeacher@gmail.com",
+    "user_pass": "12345678",
+    "role": "readWrite"
+}
+
+
+
+### Getting posts
+GET http://127.0.0.1:3000/posts?page=1&amountOfPosts=1
+Content-Type: application/json
+
+
+### Search for posts
+GET  http://127.0.0.1:3000/posts/search?q=requis
+Content-Type: application/json
+
+
+### Get one post
+GET  http://127.0.0.1:3000/posts/696584d4094eb77398ccbd12
+Content-Type: application/json
+
+
+### Creating Post 
+POST http://127.0.0.1:3000/posts
+Content-Type: application/json
+
+
+{
+    "user_name": "1",
+    "post_title": "Implementando arquivo de requisições http",
+    "post_description": "Esse post é um teste para implementação de requisições http.",
+    "post_videp_url": "https://teacherVideo.com.br"
+}
+
+### Modifying Post 
+PUT http://127.0.0.1:3000/posts/696584d4094eb77398ccbd12
+Content-Type: application/json
+
+{
+    "user_name": "NewName"
+}
+
+### Delete Post
+DELETE http://127.0.0.1:3000/posts/696584d4094eb77398ccbd12
+Content-Type: application/json
+
+### Logout User
+GET http://127.0.0.1:3000/users/logout
+Content-Type: application/json
