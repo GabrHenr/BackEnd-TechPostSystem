@@ -9,10 +9,10 @@
 * [Status do Projeto](#status_do_projeto)
 * [Pré-requisitos](#pré-requisitos-para-executar-o-projeto)
 * [Definir Env](#definir-env)
- * [Subir a Aplicação](#subir-a-aplicação)
+* [Subir a Aplicação](#subir-a-aplicação)
 * [Funcionalidades](#funcionalidades)
-** [Gerenciamento Básico de Usuários](#gerenciamento-básico-de-usuários)
-** [Gerenciamento de Posts](#gerenciamento-de-posts)
+* [Gerenciamento Básico de Usuários](#gerenciamento-básico-de-usuários)
+* [Gerenciamento de Posts](#gerenciamento-de-posts)
 * [Desafios](#desafios)
 * [Considerações Finais](#considerações-finais)
 
