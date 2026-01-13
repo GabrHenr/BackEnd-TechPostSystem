@@ -4,7 +4,6 @@
 ![Status Badge](https://img.shields.io/badge/STATUS-COMPLETE-lightgreen)
 
 # Índice 
-* [Título](#back-end-sistemas-de-posts)
 * [Descrição do Projeto](#descrição-do-projeto)
 * [Status do Projeto](#status-do-projeto)
 * [Funcionalidades](#funcionalidades)
@@ -26,7 +25,7 @@ Este projeto já cumpre com os requisitos proposto pelo Tech Challenge tornando-
 # Pré-requisitos
 
 * Node.js(V22)
-* Docker
+* Docker desktop
 * Docker Compose
 
 ## Definir env
@@ -236,5 +235,17 @@ flowchart TD
 ```
 
 
-Onde os usuários podem encontrar ajuda sobre seu projeto;
-Autores do projeto.
+# Desafios
+
+A maior dificuldade durante a criação do app foi a montagem dos controles da API, não foi uma dificuldade impeditiva, porém foi necessário muitas horas gastas em leitura de documentação, debug, e aulas complementares para entender a estruturação, melhores práticas de código e encriptamento de dados. Um ponto de falha como programador foi que durante todo o tempo de pesquisa e implementação houve vezes em que foi perdido o objetivo do programa ou variáveis eram passadas de forma errada por não ter separado um desenho das variáveis dentro banco de dados.
+
+Houve dificuldades também durante a montagem do container utilizando o docker-compose, visto que pequenos detalhes de comandos poderiam resultar em erros como a falta do "." em um dos comandos, oque gerou horas desnecessárias de debug em códigos que já estavam corretos.
+
+Outro problema foram os testes, como eu tenho pouco tempo para realizar as aulas e fazer o projeto decidi optar por fazer o projeto enquanto via as aulas, assim as aulas de TDD ficaram mais para o meio/final do projeto, isso dificultou a ideia do código ser criado juntamente dos testes, também foi necessário muito estudo nessa parte visto que o Jest de apresentou como uma ferramenta nova na minha caixa de ferramentas, isso demandou mais leitura de documentações e video aulas. Muitas vezes também a função funcionaria em situações reais mas não passaria no teste por falta de conhecimento minha de como realizar o mesmo.
+
+Dificuldade *pessoal* de interpretação, como eu venho de outra área onde tudo deve ser detalhado nos mínimos detalhes, ter a falta de instruções muito específicas deixaram-me confuso, isto aconteceu nas rotas GET /posts onde a rota é citada duas vezes durante o TechChalenge. Assim não sei se o endpoint possui duas funções ou uma, visto que para o sistema desenvolvido todo post criado é um post publicado já que não foi reqwuisitado que deveriam ter posts que não seriam publicados mas que seriam criados.
+
+Autor do projeto
+![GitHub contributors](https://img.shields.io/github/contributors-anon/GabrHenr/TechChallenge2)
+
+
