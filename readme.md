@@ -243,6 +243,8 @@ flowchart TD
     I --> G
 ```
 
+Para conferir os exemplos de requisições acesse o arquivo http do projeto
+
 
 ## Desafios
 
