@@ -46,6 +46,7 @@ const canEditPost = async (req, res, next) => {
 
 const searchQueryCheck = (req, res, next) => {
   const { q } = req.query;
+  console.log(q);
 
   if (!q) {
     return res.status(400).json({
