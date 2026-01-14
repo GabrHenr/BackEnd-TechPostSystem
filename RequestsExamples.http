@@ -54,7 +54,7 @@ Content-Type: application/json
 
 
 ### Get one post
-GET  http://127.0.0.1:3000/posts/696584d4094eb77398ccbd12
+GET  http://127.0.0.1:3000/posts/696826a294a54440b36627bb
 Content-Type: application/json
 
 
@@ -71,7 +71,7 @@ Content-Type: application/json
 }
 
 ### Modifying Post 
-PUT http://127.0.0.1:3000/posts/696584d4094eb77398ccbd12
+PUT http://127.0.0.1:3000/posts/696826a294a54440b36627bb
 Content-Type: application/json
 
 {
@@ -79,7 +79,7 @@ Content-Type: application/json
 }
 
 ### Delete Post
-DELETE http://127.0.0.1:3000/posts/696584d4094eb77398ccbd12
+DELETE http://127.0.0.1:3000/posts/696826a294a54440b36627bb
 Content-Type: application/json
 
 ### Logout User
