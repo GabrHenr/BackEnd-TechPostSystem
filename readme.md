@@ -68,6 +68,8 @@ docker-compose up --build
 
 ## Funcionalidades
 
+Atenção!! Favor consultar o arquivo RequestExamples.http para consultar exemplos de como fazer requisições a API
+
 ### Gerenciamento básico de usuários
 
 Para deixar os testes da aplicação mais simples e avaliação foi criado rotas de gerenciamento básicos de usuários
@@ -129,7 +131,7 @@ As rotas de visualização e procura de posts são protegidas de forma que apena
 
  ```mermaid
 flowchart TD
-    A[Cliente solicita a lista de posts] --> B{jwt tokens são validos?}
+    A[Cliente solicita a lista de post] --> B{jwt tokens são validos?}
     B -->|Sim| C[retorna o post]
     B -->|Não| D[erro invalid token]
     C --> E[Fim]

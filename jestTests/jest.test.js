@@ -1,6 +1,5 @@
 const request = require("supertest");
 const app = require("../src/app");
-const { registerBootstrapAdmin } = require("../database");
 
 require("dotenv").config();
 
@@ -43,9 +42,8 @@ describe("Teacher CRUD", () => {
 
   it("should list posts", async () => {
     const getAllPosts = await agent.get("/posts");
-
     expect(getAllPosts.statusCode).toBe(200);
-    expect(getAllPosts.body.length).toBeGreaterThan(0);
+    expect(getAllPosts.body.posts.data.length).toBeGreaterThan(0);
   });
 
   it("should update own post", async () => {
