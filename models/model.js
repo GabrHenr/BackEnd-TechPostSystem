@@ -6,6 +6,7 @@ const Post = mongoose.model(
     user_name: { type: "String" },
     user_id: { type: "String" },
     post_title: { type: "String" },
+    post_short_description: {type:"String"},
     post_description: { type: "String" },
     post_creation_date: { type: "Date" },
     post_last_modify_date: { type: "Date" },

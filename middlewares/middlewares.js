@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { Post } = require("../models/model");
+const { Post, User } = require("../models/model");
 
 const authToken = (req, res, next) => {
   const accessToken = req.cookies?.accessToken;
@@ -26,27 +26,43 @@ const authTeacher = (req, res, next) => {
   return res.sendStatus(403);
 };
 
-const canEditPost = async (req, res, next) => {
+const authDeletePermission = (req, res, next) => {
+  if (req.user.role == "readWrite" || req.user.role == "userAdm") {
+    return next();
+  }
+  return res.sendStatus(403);
+};
+const canEditDeletePost = async (req, res, next) => {
   try {
     const postId = req.params.id;
     const userId = req.user.id;
+    const userRole = req.user.role;
 
     const post = await Post.findById(postId);
+
     if (!post) {
       return res.status(404).json({ error: "Post not found" });
     }
-    if (post.user_id !== userId) {
-      return res.status(403).json({ error: "You are not the post owner" });
+
+    const isOwner = post.user_id.toString() === userId;
+    const isAdmin = userRole === "userAdm";
+
+    if (!isOwner && !isAdmin) {
+      return res.status(403).json({
+        error: "You do not have permission to modify this post",
+      });
     }
+
     next();
   } catch (err) {
-    return res.status(500).json({ error: "Internal server erro" });
+    return res.status(500).json({
+      error: "Internal server error",
+    });
   }
 };
 
 const searchQueryCheck = (req, res, next) => {
   const { q } = req.query;
-  console.log(q);
 
   if (!q) {
     return res.status(400).json({
@@ -61,4 +77,10 @@ const searchQueryCheck = (req, res, next) => {
   next();
 };
 
-module.exports = { authToken, authTeacher, canEditPost, searchQueryCheck };
+module.exports = {
+  authToken,
+  authTeacher,
+  canEditDeletePost,
+  searchQueryCheck,
+  authDeletePermission,
+};

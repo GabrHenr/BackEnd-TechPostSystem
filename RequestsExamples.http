@@ -24,10 +24,10 @@ POST http://127.0.0.1:3000/users/register
 Content-Type: application/json
 
 {
-    "user_name": "thisUserIsStudent",
-    "user_email": "thisUserIsStudent@gmail.com",
+    "user_name": "Admin",
+    "user_email": "AdminUserFiap@gmail.com",
     "user_pass": "12345678",
-    "role": "read"
+    "role": "userAdm"
 }
 
 ### Teacher create
@@ -44,7 +44,7 @@ Content-Type: application/json
 
 
 ### Getting posts
-GET http://127.0.0.1:3000/posts?page=1&amountOfPosts=1
+GET http://127.0.0.1:3000/posts?page=1&amountOfPosts=2
 Content-Type: application/json
 
 
@@ -54,7 +54,7 @@ Content-Type: application/json
 
 
 ### Get one post
-GET  http://127.0.0.1:3000/posts/696584d4094eb77398ccbd12
+GET  http://127.0.0.1:3000/posts/69be0112521e5e61aa0f4257
 Content-Type: application/json
 
 

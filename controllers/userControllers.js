@@ -45,9 +45,9 @@ const loginUserHandler = async (req, res) => {
           maxAge: 15 * 60 * 1000,
         });
         return res.status(201).json({
+          user_Id: userOnDB._id,
           user_name: userOnDB.user_name,
-          user_email: userOnDB.user_email,
-          user_id: userOnDB._id,
+          role: userOnDB.role,
         });
       } catch {
         return res
