@@ -130,4 +130,65 @@ const logoutUserHandler = async (req, res) => {
   }
 };
 
-module.exports = { loginUserHandler, registerUserHandler, logoutUserHandler };
+const deleteUserHandler = async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    await User.findByIdAndDelete(userId);
+    return res.status(200).json({ message: "User deleted successfully" });
+  } catch (err) {
+    console.error("Delete user error:", err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const getAllUsersHandler = async (req, res) => {
+  try {
+    const role = req.query.role;
+
+    let query = {};
+    if (role) {
+      query.role = role;
+    }
+
+    const users = await User.find(query).select("-user_pass -user_token");
+
+    return res.status(200).json({
+      count: users.length,
+      data: users,
+    });
+  } catch (err) {
+    console.error("Get all users error:", err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const searchUserByEmailHandler = async (req, res) => {
+  try {
+    const { q } = req.query;
+
+    if (!q) {
+      return res.status(400).json({
+        error: "Query parameter 'q' is required",
+      });
+    }
+
+    const regex = new RegExp(q, "i");
+    const users = await User.find({ user_email: regex }).select("-user_pass -user_token");
+
+    return res.status(200).json({
+      count: users.length,
+      data: users,
+    });
+  } catch (err) {
+    console.error("Search user by email error:", err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+module.exports = { loginUserHandler, registerUserHandler, logoutUserHandler, deleteUserHandler, getAllUsersHandler, searchUserByEmailHandler };

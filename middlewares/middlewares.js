@@ -32,6 +32,13 @@ const authDeletePermission = (req, res, next) => {
   }
   return res.sendStatus(403);
 };
+
+const authAdminOnly = (req, res, next) => {
+  if (req.user.role === "userAdm") {
+    return next();
+  }
+  return res.status(403).json({ error: "Not authorized" });
+};
 const canEditDeletePost = async (req, res, next) => {
   try {
     const postId = req.params.id;
@@ -83,4 +90,5 @@ module.exports = {
   canEditDeletePost,
   searchQueryCheck,
   authDeletePermission,
+  authAdminOnly,
 };

@@ -2,29 +2,42 @@ const { Post, User } = require("../models/model");
 
 const allPosts = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
-  const amountOfPosts = parseInt(req.query.amountOfPosts) || 5;
+  const amountOfPosts = parseInt(req.query.limit) || parseInt(req.query.amountOfPosts) || 5;
+  const userId = req.query.userId;
 
   try {
-    const posts = await Post.aggregate([
-      {
-        $facet: {
-          metadata: [{ $count: "totalCount" }],
-          data: [
-            { $skip: (page - 1) * amountOfPosts },
-            { $limit: amountOfPosts },
-            {
-              $project: {
-                user_id: 1,
-                post_title: 1,
-                user_name: 1,
-                post_creation_date: 1,
-                post_description: 1,
-              },
-            },
-          ],
+    const pipeline = [];
+
+    // Add $match stage if userId is provided
+    if (userId) {
+      pipeline.push({
+        $match: {
+          user_id: userId,
         },
+      });
+    }
+
+    // Add $facet stage with metadata and data
+    pipeline.push({
+      $facet: {
+        metadata: [{ $count: "totalCount" }],
+        data: [
+          { $skip: (page - 1) * amountOfPosts },
+          { $limit: amountOfPosts },
+          {
+            $project: {
+              user_id: 1,
+              post_title: 1,
+              user_name: 1,
+              post_creation_date: 1,
+              post_description: 1,
+            },
+          },
+        ],
       },
-    ]);
+    });
+
+    const posts = await Post.aggregate(pipeline);
 
     const totalCount = posts[0]?.metadata[0]?.totalCount || 0;
     const totalPages = Math.ceil(totalCount / amountOfPosts);
