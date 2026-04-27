@@ -10,7 +10,7 @@ Content-Type: application/json
 }
 
 ### Admin get
-GET http://127.0.0.1:3000/users?role=readWrite
+GET http://127.0.0.1:3000/users/search?q=thisUserIsTeacher
 Content-Type: application/json
 
 ### Delete

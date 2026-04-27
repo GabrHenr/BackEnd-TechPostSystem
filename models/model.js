@@ -21,6 +21,7 @@ const User = mongoose.model(
     user_pass: { type: "String" },
     role: { type: "String" },
     user_token: { type: "String" },
+    must_change_password: { type: Boolean, default: false }
   })
 );
 module.exports = { Post, User };
