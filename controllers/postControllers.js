@@ -9,7 +9,7 @@ const allPosts = async (req, res) => {
   try {
     const pipeline = [];
 
-    // Add $match stage if userId is provided
+
     if (userId) {
       pipeline.push({
         $match: {
@@ -18,7 +18,7 @@ const allPosts = async (req, res) => {
       });
     }
 
-    // Add $facet stage with metadata and data
+
     pipeline.push({
       $facet: {
         metadata: [{ $count: "totalCount" }],
@@ -59,7 +59,7 @@ const allPosts = async (req, res) => {
     });
   } catch (err) {
     return res.status(500).json({
-      error: "Error retrieving posts from server",
+      error: "Erro ao recuperar posts do servidor",
     });
   }
 };
@@ -112,7 +112,7 @@ const searchPosts = async (req, res) => {
     });
   } catch (err) {
     return res.status(500).json({
-      error: "Server error while searching posts",
+      error: "Erro do servidor ao buscar posts",
     });
   }
 };
@@ -137,9 +137,9 @@ const createPosts = async (req, res) => {
   });
   try {
     const postCreated = await postToCreate.save();
-    res.status(201).json({ success: "Post created with success", postCreated });
+    res.status(201).json({ success: "Post criado com sucesso", postCreated });
   } catch {
-    res.status(500).json({ error: "Internal server erro" });
+    res.status(500).json({ error: "Erro interno do servidor" });
   }
 };
 
@@ -147,11 +147,11 @@ const readPost = async (req, res) => {
   try {
     const postToRead = await Post.findById(req.params.id);
     if (!postToRead) {
-      return res.status(404).json({ error: "Post not found" });
+      return res.status(404).json({ error: "Post não encontrado" });
     }
     return res.status(200).json(postToRead);
   } catch {
-    res.status(500).json({ error: "Internal server erro" });
+    res.status(500).json({ error: "Erro interno do servidor" });
   }
 };
 
@@ -159,9 +159,9 @@ const editPost = async (req, res) => {
   req.body.post_last_modify_date = new Date();
   try {
     await Post.findByIdAndUpdate(req.params.id, req.body);
-    res.status(200).json({ success: "Edited with success" });
+    res.status(200).json({ success: "Editado com sucesso" });
   } catch {
-    res.status(500).json({ error: "Internal server erro" });
+    res.status(500).json({ error: "Erro interno do servidor" });
   }
 };
 
@@ -170,7 +170,7 @@ const deletePost = async (req, res) => {
     await Post.findByIdAndDelete(req.params.id);
     res.sendStatus(200);
   } catch {
-    res.status(500).json({ error: "Internal server erro" });
+    res.status(500).json({ error: "Erro interno do servidor" });
   }
 };
 

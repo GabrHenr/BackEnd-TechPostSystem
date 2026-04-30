@@ -30,7 +30,7 @@ const loginUserHandler = async (req, res) => {
 
     const userOnDB = await User.findOne({ user_email: userLoggingEmail });
     if (userOnDB == null) {
-      return res.status(401).json({ error: "Error invalid user" });
+      return res.status(401).json({ error: "Usuário inválido" });
     }
 
     const isPassRight = await bcrypt.compare(
@@ -78,12 +78,12 @@ const loginUserHandler = async (req, res) => {
       } catch {
         return res
           .status(500)
-          .json({ error: "Could not login due to server error" });
+          .json({ error: "Não foi possível fazer login devido a erro do servidor" });
       }
     }
-    return res.status(401).json({ error: "Error invalid password" });
+    return res.status(401).json({ error: "Senha inválida" });
   } catch (error) {
-    res.status(500).json({ message: "Error" });
+    res.status(500).json({ message: "Erro" });
   }
 };
 
@@ -95,7 +95,7 @@ const registerUserHandler = async (req, res) => {
     const userExists = await User.findOne({ user_email });
     if (userExists) {
       return res.status(409).json({
-        error: "User email already exists",
+        error: "Email do usuário já existe",
       });
     }
 
@@ -115,19 +115,19 @@ const registerUserHandler = async (req, res) => {
     try {
       await user.save();
       return res.status(201).json({
-        message: "User created successfully",
-        temporary_password: temporaryPassword,
+        message: "Usuário criado com sucesso",
+        senha_temporaria: temporaryPassword,
       });
     } catch (err) {
       console.error("User register error:", err);
       return res.status(500).json({
-        error: "Internal server error",
+        error: "Erro interno do servidor",
       });
     }
   } catch (err) {
     console.error("User register error:", err);
     return res.status(500).json({
-      error: "Internal server error",
+      error: "Erro interno do servidor",
     });
   }
 };
@@ -173,16 +173,16 @@ const deleteUserHandler = async (req, res) => {
     if (userId === requestingUserId) {
       return res
         .status(403)
-        .json({ error: "You cannot delete your own account" });
+        .json({ error: "Você não pode deletar sua própria conta" });
     }
 
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(404).json({ error: "Usuário não encontrado" });
     }
 
     await User.findByIdAndDelete(userId);
-    return res.status(200).json({ message: "User deleted successfully" });
+    return res.status(200).json({ message: "Usuário deletado com sucesso" });
   } catch (err) {
     console.error("Delete user error:", err);
     return res.status(500).json({ error: "Internal server error" });
@@ -242,7 +242,7 @@ const getAllUsersHandler = async (req, res) => {
     });
   } catch (err) {
     console.error("Get all users error:", err);
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ error: "Erro interno do servidor" });
   }
 };
 
@@ -254,7 +254,7 @@ const searchUserByEmailHandler = async (req, res) => {
 
     if (!q) {
       return res.status(400).json({
-        error: "Query parameter 'q' is required",
+        error: "O parâmetro 'q' é obrigatório",
       });
     }
 
@@ -301,7 +301,7 @@ const searchUserByEmailHandler = async (req, res) => {
     });
   } catch (err) {
     console.error("Search user by email error:", err);
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ error: "Erro interno do servidor" });
   }
 };
 
@@ -313,12 +313,12 @@ const editUserHandler = async (req, res) => {
 
     // Prevent user from editing their own account
     if (userId === requestingUserId) {
-      return res.status(403).json({ error: "You cannot edit your own account" });
+      return res.status(403).json({ error: "Você não pode editar sua própria conta" });
     }
 
     const userToEdit = await User.findById(userId);
     if (!userToEdit) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(404).json({ error: "Usuário não encontrado" });
     }
 
     // Validate and check if new email is unique (only if email is being changed)
@@ -326,7 +326,7 @@ const editUserHandler = async (req, res) => {
       const emailExists = await User.findOne({ user_email });
       if (emailExists) {
         return res.status(409).json({
-          error: "Email already registered",
+          error: "Email já existe",
         });
       }
     }
@@ -345,7 +345,7 @@ const editUserHandler = async (req, res) => {
     await userToEdit.save();
 
     return res.status(200).json({
-      message: "User updated successfully",
+      message: "Usuário modificado com sucesso",
       data: {
         _id: userToEdit._id,
         user_name: userToEdit.user_name,
@@ -367,7 +367,7 @@ const changePasswordHandler = async (req, res) => {
     // Validate input
     if (!current_password || !new_password) {
       return res.status(400).json({
-        message: "Both current_password and new_password are required",
+        message: "Senha antiga e nova é necessária",
       });
     }
 
@@ -384,7 +384,7 @@ const changePasswordHandler = async (req, res) => {
     );
     if (!isCurrentPasswordValid) {
       return res.status(401).json({
-        message: "Current password is incorrect",
+        message: "Senha atual incorreta",
       });
     }
 
@@ -392,7 +392,7 @@ const changePasswordHandler = async (req, res) => {
     const isSamePassword = verifyPassword(new_password, user.user_pass);
     if (isSamePassword) {
       return res.status(400).json({
-        message: "New password must be different from current password",
+        message: "Nova senha deve ser diferente da anterior",
       });
     }
 
@@ -413,10 +413,9 @@ const changePasswordHandler = async (req, res) => {
     await user.save();
 
     return res.status(200).json({
-      message: "Password updated successfully",
+      message: "Senha modificada com sucesso",
     });
   } catch (err) {
-    console.error("Change password error:", err);
     return res.status(500).json({ message: "Internal server error" });
   }
 };

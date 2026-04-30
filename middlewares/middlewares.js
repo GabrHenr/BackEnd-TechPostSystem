@@ -5,14 +5,14 @@ const authToken = (req, res, next) => {
   const accessToken = req.cookies?.accessToken;
 
   if (!accessToken) {
-    return res.status(401).json({ error: "Access token not provided" });
+    return res.status(401).json({ error: "Token de acesso não fornecido" });
   }
   jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
     if (err) {
       if (err.name === "TokenExpiredError") {
-        return res.status(401).json({ error: "Token expired" });
+        return res.status(401).json({ error: "Token expirado" });
       }
-      return res.status(401).json({ error: "Invalid token" });
+      return res.status(401).json({ error: "Token inválido" });
     }
     req.user = decoded;
     return next();
@@ -37,7 +37,7 @@ const authAdminOnly = (req, res, next) => {
   if (req.user.role === "userAdm") {
     return next();
   }
-  return res.status(403).json({ error: "Not authorized" });
+  return res.status(403).json({ error: "Não autorizado" });
 };
 const canEditDeletePost = async (req, res, next) => {
   try {
@@ -48,7 +48,7 @@ const canEditDeletePost = async (req, res, next) => {
     const post = await Post.findById(postId);
 
     if (!post) {
-      return res.status(404).json({ error: "Post not found" });
+      return res.status(404).json({ error: "Post não encontrado" });
     }
 
     const isOwner = post.user_id.toString() === userId;
@@ -56,14 +56,14 @@ const canEditDeletePost = async (req, res, next) => {
 
     if (!isOwner && !isAdmin) {
       return res.status(403).json({
-        error: "You do not have permission to modify this post",
+        error: "Você não tem permissão para modificar este post",
       });
     }
 
     next();
   } catch (err) {
     return res.status(500).json({
-      error: "Internal server error",
+      error: "Erro interno do servidor",
     });
   }
 };
@@ -73,7 +73,7 @@ const searchQueryCheck = (req, res, next) => {
 
   if (!q) {
     return res.status(400).json({
-      error: "Query parameter 'q' is required",
+      error: "O parâmetro 'q' é obrigatório",
     });
   }
 
