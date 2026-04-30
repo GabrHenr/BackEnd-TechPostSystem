@@ -3,20 +3,32 @@ const { Post, User } = require("../models/model");
 
 const authToken = (req, res, next) => {
   const accessToken = req.cookies?.accessToken;
-
   if (!accessToken) {
-    return res.status(401).json({ error: "Token de acesso não fornecido" });
+    return res.status(401).json({
+      error: "Token de acesso não fornecido",
+      code: "TOKEN_MISSING",
+    });
   }
-  jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-    if (err) {
-      if (err.name === "TokenExpiredError") {
-        return res.status(401).json({ error: "Token expirado" });
+  jwt.verify(
+    accessToken,
+    process.env.ACCESS_TOKEN_SECRET,
+    (err, decoded) => {
+      if (err) {
+        if (err.name === "TokenExpiredError") {
+          return res.status(401).json({
+            error: "Token expirado",
+            code: "TOKEN_EXPIRED",
+          });
+        }
+        return res.status(401).json({
+          error: "Token inválido",
+          code: "INVALID_TOKEN",
+        });
       }
-      return res.status(401).json({ error: "Token inválido" });
-    }
-    req.user = decoded;
-    return next();
-  });
+      req.user = decoded;
+      return next();
+    },
+  );
 };
 
 const authTeacher = (req, res, next) => {
