@@ -1,30 +1,30 @@
 const bcrypt = require("bcrypt");
 
-// Password strength requirements
+// Requisitos de força de senha
 const PASSWORD_MIN_LENGTH = 8;
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[a-zA-Z\d@$!%*?&]{8,}$/;
 
 /**
- * Validates password strength
- * Requirements:
- * - Minimum 8 characters
- * - At least one uppercase letter
- * - At least one lowercase letter
- * - At least one number
- * - At least one special character (@$!%*?&)
+ * Valida a força da senha
+ * Requisitos:
+ * - Mínimo 8 caracteres
+ * - Pelo menos uma letra maiúscula
+ * - Pelo menos uma letra minúscula
+ * - Pelo menos um número
+ * - Pelo menos um caractere especial (@$!%*?&)
  */
 const validatePasswordStrength = (password) => {
   if (!password || password.length < PASSWORD_MIN_LENGTH) {
     return {
       isValid: false,
-      error: `Password must be at least ${PASSWORD_MIN_LENGTH} characters long`,
+      error: `A senha deve ter pelo menos ${PASSWORD_MIN_LENGTH} caracteres`,
     };
   }
 
   if (!PASSWORD_REGEX.test(password)) {
     return {
       isValid: false,
-      error: "Password must contain uppercase, lowercase, numbers, and special characters (@$!%*?&)",
+      error: "A senha deve conter letras maiúsculas, minúsculas, números e caracteres especiais (@$!%*?&)",
     };
   }
 
@@ -35,14 +35,14 @@ const validatePasswordStrength = (password) => {
 };
 
 /**
- * Verifies if provided password matches hashed password
+ * Verifica se a senha fornecida corresponde à senha hash
  */
 const verifyPassword = (plainPassword, hashedPassword) => {
   return bcrypt.compareSync(plainPassword, hashedPassword);
 };
 
 /**
- * Hashes a password with bcrypt
+ * Criptografa uma senha com bcrypt
  */
 const hashPassword = async (password) => {
   return await bcrypt.hash(password, bcrypt.genSaltSync(8));
