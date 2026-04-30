@@ -100,7 +100,7 @@ const registerUserHandler = async (req, res) => {
     }
 
 
-    const temporaryPassword = generateTemporaryPassword();
+    const temporaryPassword = await generateTemporaryPassword();
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(temporaryPassword, salt);
 
@@ -116,7 +116,7 @@ const registerUserHandler = async (req, res) => {
       await user.save();
       return res.status(201).json({
         message: "Usuário criado com sucesso",
-        senha_temporaria: temporaryPassword,
+        temporary_password: temporaryPassword,
       });
     } catch (err) {
       console.error("User register error:", err);
