@@ -1,7 +1,7 @@
 FROM node:22-slim
 
 
-WORKDIR /usr/src/postApp/src
+WORKDIR /usr/src/postApp/
 
 COPY package.json .
 

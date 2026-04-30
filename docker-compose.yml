@@ -29,10 +29,10 @@ services:
     volumes:
       - .:/usr/src/postApp
 
-  frontend:
-    build: ../FrontEnd-TechPostSystem-devel
-    container_name: posts_front
-    ports:
-      - "5173:80"
-    depends_on:
-      - api
+  # frontend:
+  #   build: ../FrontEnd-TechPostSystem-devel
+  #   container_name: posts_front
+  #   ports:
+  #     - "5173:80"
+  #   depends_on:
+  #     - api
