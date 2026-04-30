@@ -36,7 +36,7 @@ Content-Type: application/json
 }
 
 
-### Student create
+### Admin create
 POST http://127.0.0.1:3000/users/register
 Content-Type: application/json
 

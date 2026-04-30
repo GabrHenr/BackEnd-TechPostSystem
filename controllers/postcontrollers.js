@@ -2,7 +2,8 @@ const { Post, User } = require("../models/model");
 
 const allPosts = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
-  const amountOfPosts = parseInt(req.query.limit) || parseInt(req.query.amountOfPosts) || 5;
+  const amountOfPosts =
+    parseInt(req.query.limit) || parseInt(req.query.amountOfPosts) || 5;
   const userId = req.query.userId;
 
   try {
@@ -22,6 +23,11 @@ const allPosts = async (req, res) => {
       $facet: {
         metadata: [{ $count: "totalCount" }],
         data: [
+          {
+            $sort: {
+              post_creation_date: -1,
+            },
+          },
           { $skip: (page - 1) * amountOfPosts },
           { $limit: amountOfPosts },
           {

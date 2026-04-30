@@ -8,7 +8,7 @@ const {
   hashPassword,
 } = require("../services/passwordService");
 
-// Generate a secure temporary password (8-12 alphanumeric characters)
+
 const generateTemporaryPassword = () => {
   const length = Math.floor(Math.random() * 5) + 8; // 8-12 characters
   const charset =
@@ -99,7 +99,7 @@ const registerUserHandler = async (req, res) => {
       });
     }
 
-    // Generate temporary password instead of using one from request
+
     const temporaryPassword = generateTemporaryPassword();
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(temporaryPassword, salt);
@@ -109,7 +109,7 @@ const registerUserHandler = async (req, res) => {
       user_email,
       user_pass: hashedPassword,
       role: user_role,
-      must_change_password: true, // Force password change on first login
+      must_change_password: true,
     });
 
     try {
@@ -169,7 +169,7 @@ const deleteUserHandler = async (req, res) => {
     const userId = req.params.id;
     const requestingUserId = req.user.id;
 
-    // Prevent user from deleting their own account
+
     if (userId === requestingUserId) {
       return res
         .status(403)
@@ -311,10 +311,10 @@ const editUserHandler = async (req, res) => {
     const requestingUserId = req.user.id;
     const { user_name, user_email, role } = req.body;
 
-    // // Prevent user from editing their own account
-    // if (userId === requestingUserId) {
-    //   return res.status(403).json({ error: "You cannot edit your own account" });
-    // }
+    // Prevent user from editing their own account
+    if (userId === requestingUserId) {
+      return res.status(403).json({ error: "You cannot edit your own account" });
+    }
 
     const userToEdit = await User.findById(userId);
     if (!userToEdit) {
